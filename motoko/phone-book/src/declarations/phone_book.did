@@ -6,6 +6,7 @@ type Entry =
    phone: Phone;
  };
 service : {
-  insert: (Name, Entry) -> ();
-  lookup: (Name) -> (opt Entry) query;
+  deleteEntry: (text) -> (text);
+  insert: (Name, Entry) -> (text);
+  lookup: (text) -> (opt Entry) query;
 }
