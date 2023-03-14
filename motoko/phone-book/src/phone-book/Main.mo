@@ -46,6 +46,11 @@ actor {
 
   public func deleteEntry(text:Text) : async Text {
     if(phonebook.get(text)!=null) { //Checking that if given input is present in phone book.
+      var phone: Phone = switch(phonebook.get(text)) {
+        case null "";
+        case (?result)  result.phone;
+      };
+      phoneToName.delete(phone);
       phonebook.delete(text);
       return "Successfully Deleted Entry";
     }
@@ -56,6 +61,7 @@ actor {
         case (?result)  result;
       };
       if(name!="") { //If name is not null then entry corresponding to that name is deleted.
+        phoneToName.delete(text);
         phonebook.delete(name);
         return "Successfully Deleted Entry."
       }
